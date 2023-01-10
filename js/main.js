@@ -1,16 +1,7 @@
-// When screen is clicked, screen will clear (to result) the first time; 
-
-// When cleared screen is clicked, current result will be cleared;
-
-//Input Vars
-// const keys = document.querySelectorAll('.key');
-// console.log(keys);
-// keys.forEach(function(currentKey){
-//   currentKey.addEventListener('click', e => console.log(`${e.target} 25`))
-// });
-
 //Global Vars
 let previousResult = "", operator = "", newNum="", calculated = false;
+//Display output
+let display = document.querySelector('.calcScreen h1')//.innerText
 
 // Key Bindings
 document.querySelector('#zero').addEventListener('click', keyZeroAction);
@@ -31,8 +22,7 @@ document.querySelector('#divide').addEventListener('click', e => keyDivideAction
 document.querySelector('#equals').addEventListener('click', keyEqualsAction);
 document.querySelector('.calcScreen').addEventListener('click', clear);
 
-//Display output
-let display = document.querySelector('.calcScreen h1')//.innerText
+
 
 
 //Key Binding Actions
@@ -84,6 +74,9 @@ function keyDivideAction(e){
 function keyEqualsAction(){ 
     calculate();           
 }
+
+//Functions
+
 function clear(){
     //CE
     if(newNum!=="" && !calculated) 
@@ -112,14 +105,7 @@ function clearOperationBackgrounds(){
     document.querySelectorAll('.operator').forEach(thisButton => thisButton.style.backgroundColor = "");
 }
 
-//Calculation Functions
-
 function updateDisplay() {
-    // if((previousResult!=="" && newNum!=="" && !calculated)
-    //         ||(previousResult==="" && operator==="" && newNum!=="" && !calculated))
-    //     display = newNum;
-    // else
-    //     display = previousResult;
     if(newNum!=="" && !calculated){
         display.innerText = newNum;
         //document.querySelector('.calcScreen h1').innerText = newNum;
@@ -168,31 +154,31 @@ function operation(inputOp, e){
     console.log(`Starting Operation: Previous Result is ${previousResult}; Operator = ${operator}; New Number is ${newNum}; Calculated is ${calculated};`);
 
 
-//if calculation in progress (both prev & new nums) and starting new calculation ontop of it's result 
-if(previousResult !=="" && operator !=="" && newNum!=="" && !calculated){
-    calculate();
-    console.log("calc in progress, calulating and starting new calculation ontop of its result ")
-}
+    //if calculation in progress (both prev & new nums) and starting new calculation ontop of it's result 
+    if(previousResult !=="" && operator !=="" && newNum!=="" && !calculated){
+        calculate();
+        console.log("calc in progress, calulating and starting new calculation ontop of its result ")
+    }
 
-//if calc completed, and this is a new operation ontop of previous result
-    //previousResult!=="" && operator!=="" && newNum == "" && caculated)
-if(previousResult!=="" && operator!=="" && newNum !== "" && calculated){
-    newNum = "";
-    console.log("Calc completed.. starting new operation ontop of previous result")
-}
-    
-// If (starting new calculation from AC
-else if(previousResult === "" && operator === ""){
-    previousResult = newNum;
-    newNum = "";
-    console.log("Starting new calculation from AC")
-}
-// else (new calc started but no 2nd arg defined yet, so just switching operators, so just need shared logic
-console.log(`Operator changed to: ${inputOp}`)
-operator = inputOp;
-clearOperationBackgrounds();
-document.querySelector(`#${e.srcElement.id}`).style.backgroundColor = "red";
-updateDisplay();
+    //if calc completed, and this is a new operation ontop of previous result
+        //previousResult!=="" && operator!=="" && newNum == "" && caculated)
+    if(previousResult!=="" && operator!=="" && newNum !== "" && calculated){
+        newNum = "";
+        console.log("Calc completed.. starting new operation ontop of previous result")
+    }
+        
+    // If (starting new calculation from AC
+    else if(previousResult === "" && operator === ""){
+        previousResult = newNum;
+        newNum = "";
+        console.log("Starting new calculation from AC")
+    }
+    // else (new calc started but no 2nd arg defined yet, so just switching operators, so just need shared logic
+    console.log(`Operator changed to: ${inputOp}`)
+    operator = inputOp;
+    clearOperationBackgrounds();
+    document.querySelector(`#${e.srcElement.id}`).style.backgroundColor = "red";
+    updateDisplay();
  
 }
 
@@ -204,39 +190,33 @@ function calculate(){
             console.log("Error: Can't divide by nothing")
             return;
         }    
+    if(previousResult=="" || newNum=="")
+        return;
 
-        console.log(`Calculated: Storing result of following equation: ${previousResult}${operator}${newNum} ... into previousResult`);
+
+    //console.log(`Calculated: Storing result of following equation: ${previousResult}${operator}${newNum} ... into previousResult`);
     previousResult = eval(`${previousResult}${operator}${newNum}`);
-        console.log(`Calculated: Previous Result is now ${previousResult}`);
+    //console.log(`Calculated: Previous Result is now ${previousResult}`);
 
     clearOperationBackgrounds();
     calculated = true;
     updateDisplay();
 
-/* Calculate
-    *Input Parameters: PreviousResult, Operator, outputScreen, isNum2
-    *Return: OperationResult
-    *Logic:
-        * if(operator=division)
-            * if outputScreenNumber != 0 
-                * Return "Error: Can't Divide by 0"
-            * else
-                * switch(this.operation) {
-                    case "+":
-                        return param1 + param2;
-                    case "-":
-                        return param1 - param2;
-                    case "*":
-                        return param1 * param2;
-                    case "/":{
-                        if outputScreenNumber != 0 
-                            * Return "Error: Can't Divide by 0"
-                        return param1 / param2;
-                    }
-                        
-                }
-        
-*/
+    /* Logic for not using "eval"
+        * switch(this.operation) {
+            case "+":
+                return param1 + param2;
+            case "-":
+                return param1 - param2;
+            case "*":
+                return param1 * param2;
+            case "/":{
+                return param1 / param2;
+            }
+                
+        }
+            
+    */
 }
 
 
