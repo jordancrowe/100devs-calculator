@@ -25,10 +25,10 @@ body {
     box-sizing: border-box;
 }
 
-/* Reset default button styling */
-button{
+/* Reset default button styling (no on click animation)*/
+/* button{
     border: none;
-}
+} */
 
 /******************************************
 /* LAYOUT
@@ -130,7 +130,7 @@ button{
     order:15;
 }
 
-.key.minus{
+.key.subtract{
     order:16;
 }
 
@@ -153,3 +153,4 @@ button{
     align-items: center;
     /* border: 5px solid red; */
 }
+
