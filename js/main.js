@@ -99,9 +99,10 @@ function clear(){
         previousResult = "";
         newNum = "";
         operator = "";
-        calculated = false;
         console.log("AC")
     }
+
+    calculated=false;
     clearOperationBackgrounds();
     updateDisplay();
     console.log(`Previous Result is ${previousResult}; Operator = ${operator}; New Number is ${newNum}; Calculated is ${calculated}; Display = ${display}`);
