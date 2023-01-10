@@ -200,6 +200,7 @@ function calculate(){
     if(operator === "/" && ["","0"].includes(newNum))
         {
             clear()
+            display.innerText = "Error"
             console.log("Error: Can't divide by nothing")
             return;
         }    
