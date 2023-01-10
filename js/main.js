@@ -151,8 +151,11 @@ function inputDec(){
         
 
 function inputNum(inputNumberVal){
-    if(calculated && newNum!=="")
+    if((calculated && newNum!=="") || (operator =="" && newNum=="")){
+        clear(); //CE
         clear(); //AC
+    }
+        
     newNum += inputNumberVal;    
     calculated = false;
     updateDisplay();
