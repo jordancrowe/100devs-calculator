@@ -153,7 +153,6 @@ function inputNum(inputNumberVal){
 function operation(inputOp, e){
     console.log(`Starting Operation: Previous Result is ${previousResult}; Operator = ${operator}; New Number is ${newNum}; Calculated is ${calculated};`);
 
-
     //if calculation in progress (both prev & new nums) and starting new calculation ontop of it's result 
     if(previousResult !=="" && operator !=="" && newNum!=="" && !calculated){
         calculate();
